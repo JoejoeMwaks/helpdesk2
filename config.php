@@ -3,11 +3,11 @@
 session_start();
 
 // Database configuration
-$db_host = getenv('MYSQL_HOST') ?: 'localhost';
-$db_port = getenv('MYSQL_PORT') ?: '3306';
-$db_name = getenv('MYSQL_DATABASE') ?: 'knbs_visitor_system';
-$db_user = getenv('MYSQL_USER') ?: 'root';
-$db_pass = getenv('MYSQL_PASSWORD') ?: '';
+$db_host = getenv('MYSQLHOST') ?: (getenv('MYSQL_HOST') ?: 'localhost');
+$db_port = getenv('MYSQLPORT') ?: (getenv('MYSQL_PORT') ?: '3306');
+$db_name = getenv('MYSQLDATABASE') ?: (getenv('MYSQL_DATABASE') ?: 'knbs_visitor_system');
+$db_user = getenv('MYSQLUSER') ?: (getenv('MYSQL_USER') ?: 'root');
+$db_pass = getenv('MYSQLPASSWORD') ?: (getenv('MYSQL_PASSWORD') ?: '');
 
 define('DB_HOST', $db_host);
 define('DB_PORT', $db_port);
