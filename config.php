@@ -3,14 +3,21 @@
 session_start();
 
 // Database configuration
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'knbs_visitor_system');
-define('DB_USER', 'root');
-define('DB_PASS', '');
+$db_host = getenv('MYSQL_HOST') ?: 'localhost';
+$db_port = getenv('MYSQL_PORT') ?: '3306';
+$db_name = getenv('MYSQL_DATABASE') ?: 'knbs_visitor_system';
+$db_user = getenv('MYSQL_USER') ?: 'root';
+$db_pass = getenv('MYSQL_PASSWORD') ?: '';
+
+define('DB_HOST', $db_host);
+define('DB_PORT', $db_port);
+define('DB_NAME', $db_name);
+define('DB_USER', $db_user);
+define('DB_PASS', $db_pass);
 
 // Create database connection
 try {
-    $pdo = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASS);
+    $pdo = new PDO("mysql:host=" . DB_HOST . ";port=" . DB_PORT . ";dbname=" . DB_NAME, DB_USER, DB_PASS);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch(PDOException $e) {
     die("Connection failed: " . $e->getMessage());
