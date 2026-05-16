@@ -1,49 +1,44 @@
+/* css/style.css */
 :root {
-    /* Main Palette */
-    --primary-color: #80432e;
-    --primary-dark: #5d2e1f;
-    --accent-color: #d4a373;
-    --accent-light: #f4e1c0;
-    
-    /* Semantic Colors */
-    --success: #10b981;
-    --error: #ef4444;
-    --warning: #f59e0b;
-    --info: #3b82f6;
-    
-    /* Theme Variables (Light by default) */
-    --bg-main: #f8fafc;
-    --bg-card: #ffffff;
-    --bg-sidebar: #ffffff;
-    --text-main: #1e293b;
-    --text-muted: #64748b;
-    --border-color: #e2e8f0;
-    --card-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --primary-brown: #80432e;
+    --accent-gold: #f4e1c0;
+    --success-green: #28a745;
+    --error-red: #dc3545;
+    --warning-yellow: #f4e1c0;
+    --info-blue: #17a2b8;
+    --text-primary: #333;
+    --text-secondary: #495057;
+    --text-muted: #6c757d;
+    --bg-white: rgba(255,255,255,0.95);
+    --bg-content: rgba(255,255,255,0.92);
+    --bg-secondary: rgba(255,255,255,0.8);
+    --bg-card: #f8f9fa;
+    --border-color: #dee2e6;
+    --shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Outfit', 'Inter', 'Segoe UI', system-ui, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 html, body {
-    overflow-x: hidden;
+    overflow-x: auto;
 }
 
 body {
-    background-color: var(--bg-main);
-    color: var(--text-main);
+    background: linear-gradient(135deg, #f5f5f5 0%, #e9ecef 100%);
+    color: var(--text-primary);
     line-height: 1.6;
     min-height: 100vh;
-    transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s ease;
 }
 
 .container {
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 0 24px;
+    padding: 0 15px;
 }
 
 /* Header Styles */
@@ -134,11 +129,10 @@ nav {
 }
 
 .sidebar {
-    background-color: var(--bg-sidebar);
-    border-radius: 16px;
-    border: 1px solid var(--border-color);
-    padding: 24px;
-    box-shadow: var(--card-shadow);
+    background-color: var(--bg-white);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    padding: 20px;
 }
 
 .sidebar-menu {
@@ -146,38 +140,30 @@ nav {
 }
 
 .sidebar-menu li {
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 }
 
 .sidebar-menu a {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 12px 16px;
-    color: var(--text-main);
+    gap: 10px;
+    padding: 10px 15px;
+    color: var(--text-primary);
     text-decoration: none;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-    font-weight: 500;
+    border-radius: 4px;
+    transition: background-color 0.3s;
 }
 
 .sidebar-menu a:hover, .sidebar-menu a.active {
     background-color: var(--bg-card);
-    color: var(--primary-color);
-    box-shadow: inset 0 0 0 1px var(--border-color);
-}
-
-body.dark-theme .sidebar-menu a:hover, 
-body.dark-theme .sidebar-menu a.active {
-    color: var(--accent-color);
+    color: var(--primary-brown);
 }
 
 .content {
-    background-color: var(--bg-card);
-    border-radius: 16px;
-    border: 1px solid var(--border-color);
-    padding: 32px;
-    box-shadow: var(--card-shadow);
+    background-color: var(--bg-content);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    padding: 25px;
 }
 
 /* Dashboard Stats */
@@ -190,31 +176,23 @@ body.dark-theme .sidebar-menu a.active {
 
 .stat-card {
     background-color: var(--bg-card);
-    border-radius: 16px;
-    padding: 24px;
+    border-radius: 8px;
+    padding: 20px;
     text-align: center;
-    box-shadow: var(--card-shadow);
-    border: 1px solid var(--border-color);
-    transition: transform 0.3s ease, border-color 0.3s ease;
-}
-
-.stat-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--accent-color);
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--primary-brown);
 }
 
 .stat-number {
-    font-size: 2.8rem;
-    font-weight: 800;
-    color: var(--accent-color);
-    margin-bottom: 8px;
-    letter-spacing: -1px;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--primary-brown);
+    margin-bottom: 10px;
 }
 
 .stat-label {
-    color: var(--text-muted);
-    font-weight: 500;
-    font-size: 0.95rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
 }
 
 /* Tables */
@@ -657,39 +635,51 @@ footer {
     transform: scale(1.1);
 }
 
-/* 🌙 Deep Midnight Dark Theme */
+/* 🌙 Dark Theme Variables */
 body.dark-theme {
-    --bg-main: #0f172a; /* Deep Navy/Slate */
-    --bg-card: #1e293b; /* Lighter Slate for cards */
-    --bg-sidebar: #0f172a;
-    --bg-secondary: #1e293b;
-    --text-main: #f1f5f9;
-    --text-muted: #94a3b8;
-    --border-color: #334155;
-    --nav-bg: #1e293b;
-    --accent-color: #fbbf24; /* Brighter Gold for dark mode */
-    --card-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.5);
-    
-    background-color: var(--bg-main) !important;
-    color: var(--text-main);
+    --primary-brown: #111;
+    --accent-gold: #d4a373;
+    --text-primary: #fff;
+    --text-secondary: #ccc;
+    --text-muted: #aaa;
+    --bg-white: #000;
+    --bg-content: #111;
+    --bg-secondary: #1a1a1a;
+    --bg-card: #1f1f1f;
+    --border-color: #333;
+    background: #000 !important;
+    color: var(--text-primary);
 }
 
 body.dark-theme header,
 body.dark-theme footer {
-    background: #1e293b;
+    background-color: #000;
 }
 
 body.dark-theme nav {
-    background-color: #0f172a;
-    border-bottom: 1px solid var(--border-color);
+    background-color: #222;
+}
+
+body.dark-theme .btn-warning {
+    background-color: #d4a373;
+    color: #000;
 }
 
 body.dark-theme table,
 body.dark-theme .content,
-body.dark-theme .sidebar,
-body.dark-theme .stat-card {
+body.dark-theme .sidebar {
     background-color: var(--bg-card);
-    color: var(--text-main);
-    border-color: var(--border-color);
-    box-shadow: var(--card-shadow);
+    color: var(--text-primary);
+}
+
+.full-width-footer {
+  background-color: var(--primary-brown);
+  color: white;
+  padding: 40px 0 20px;
+}
+
+.full-width-footer .footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
