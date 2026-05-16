@@ -1,0 +1,9 @@
+.git
+.vscode
+.gitignore
+*.sql
+README.md
+Dockerfile
+.dockerignore
+vendor/
+node_modules/
