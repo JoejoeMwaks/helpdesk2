@@ -635,34 +635,36 @@ footer {
     transform: scale(1.1);
 }
 
-/* 🌙 Dark Theme Variables */
+/* 🌙 Refined Dark Theme - Maintains Brown/Gold Identity */
 body.dark-theme {
-    --primary-brown: #111;
-    --accent-gold: #d4a373;
-    --text-primary: #fff;
-    --text-secondary: #ccc;
-    --text-muted: #aaa;
-    --bg-white: #000;
-    --bg-content: #111;
-    --bg-secondary: #1a1a1a;
-    --bg-card: #1f1f1f;
-    --border-color: #333;
-    background: #000 !important;
+    --primary-brown: #3d1f15; /* Rich Deep Brown instead of black */
+    --accent-gold: #f4e1c0;   /* Original Brand Gold */
+    --text-primary: #f8fafc;  /* High contrast off-white */
+    --text-secondary: #e2e8f0;
+    --text-muted: #94a3b8;
+    --bg-white: #1a110f;      /* Deepest Cocoa background */
+    --bg-content: #241815;    /* Slightly lighter for content area */
+    --bg-secondary: #2d1d18;
+    --bg-card: #2d1d18;       /* Visible "Mocha" cards */
+    --border-color: #4a342e;  /* Warm borders */
+    background: #1a110f !important;
     color: var(--text-primary);
 }
 
 body.dark-theme header,
 body.dark-theme footer {
-    background-color: #000;
+    background-color: #241815;
+    border-bottom: 1px solid var(--border-color);
 }
 
 body.dark-theme nav {
-    background-color: #222;
+    background-color: #3d1f15;
+    border-bottom: 1px solid var(--border-color);
 }
 
 body.dark-theme .btn-warning {
-    background-color: #d4a373;
-    color: #000;
+    background-color: var(--accent-gold);
+    color: #3d1f15;
 }
 
 body.dark-theme table,
@@ -670,6 +672,11 @@ body.dark-theme .content,
 body.dark-theme .sidebar {
     background-color: var(--bg-card);
     color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+body.dark-theme tr:hover {
+    background-color: rgba(244, 225, 192, 0.05);
 }
 
 .full-width-footer {
