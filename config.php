@@ -17,8 +17,20 @@ define('DB_PASS', $db_pass);
 
 // Create database connection
 try {
-    $pdo = new PDO("mysql:host=" . DB_HOST . ";port=" . DB_PORT . ";dbname=" . DB_NAME, DB_USER, DB_PASS);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $options = [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    ];
+
+    // If using a production DB like Aiven that requires SSL
+    if (getenv('MYSQL_SSL_CA')) {
+        $options[PDO::MYSQL_ATTR_SSL_CA] = getenv('MYSQL_SSL_CA');
+    } else if (strpos($db_host, 'aivencloud.com') !== false) {
+        // Simple SSL enable for Aiven if no specific CA provided
+        $options[PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT] = false;
+    }
+
+    $pdo = new PDO("mysql:host=" . DB_HOST . ";port=" . DB_PORT . ";dbname=" . DB_NAME, DB_USER, DB_PASS, $options);
 } catch(PDOException $e) {
     die("Connection failed: " . $e->getMessage());
 }
