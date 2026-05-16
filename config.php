@@ -26,12 +26,11 @@ try {
     if (getenv('MYSQL_SSL_CA')) {
         $options[PDO::MYSQL_ATTR_SSL_CA] = getenv('MYSQL_SSL_CA');
     } else if (strpos($db_host, 'aivencloud.com') !== false || getenv('MYSQL_SSL_ENABLE') === 'true') {
-        // Force SSL for Aiven or if specifically enabled
-        $options[PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT] = false;
-        // In some PHP versions, you need to set a dummy CA or use this flag to trigger SSL
-        if (defined('PDO::MYSQL_ATTR_SSL_CAPATH')) {
-            $options[PDO::MYSQL_ATTR_SSL_CAPATH] = '/etc/ssl/certs/';
+        // Use the standard CA bundle location in Debian-based Docker images
+        if (file_exists('/etc/ssl/certs/ca-certificates.crt')) {
+            $options[PDO::MYSQL_ATTR_SSL_CA] = '/etc/ssl/certs/ca-certificates.crt';
         }
+        $options[PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT] = false;
     }
 
     $pdo = new PDO("mysql:host=" . DB_HOST . ";port=" . DB_PORT . ";dbname=" . DB_NAME, DB_USER, DB_PASS, $options);
