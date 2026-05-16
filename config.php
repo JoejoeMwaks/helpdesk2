@@ -25,9 +25,13 @@ try {
     // If using a production DB like Aiven that requires SSL
     if (getenv('MYSQL_SSL_CA')) {
         $options[PDO::MYSQL_ATTR_SSL_CA] = getenv('MYSQL_SSL_CA');
-    } else if (strpos($db_host, 'aivencloud.com') !== false) {
-        // Simple SSL enable for Aiven if no specific CA provided
+    } else if (strpos($db_host, 'aivencloud.com') !== false || getenv('MYSQL_SSL_ENABLE') === 'true') {
+        // Force SSL for Aiven or if specifically enabled
         $options[PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT] = false;
+        // In some PHP versions, you need to set a dummy CA or use this flag to trigger SSL
+        if (defined('PDO::MYSQL_ATTR_SSL_CAPATH')) {
+            $options[PDO::MYSQL_ATTR_SSL_CAPATH] = '/etc/ssl/certs/';
+        }
     }
 
     $pdo = new PDO("mysql:host=" . DB_HOST . ";port=" . DB_PORT . ";dbname=" . DB_NAME, DB_USER, DB_PASS, $options);
